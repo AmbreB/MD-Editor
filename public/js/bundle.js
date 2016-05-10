@@ -1295,35 +1295,40 @@ var marked = require('marked');
 $(function () {
 	var app = {
 		init: function init() {
+
+			// Initialisation des deux éditeurs
+
 			var mdEditor = CodeMirror(document.getElementById('container'), {
-				value: "# Hello",
+				value: "Hi there",
 				mode: "text/x-markdown",
 				lineNumbers: true,
 				theme: "default",
-				autofocus: true
+				autofocus: true,
+				fontSize: "24px"
 			});
-
-			var htmlEditor = CodeMirror(document.getElementById('container'), {
-				value: "<h1>Hello</h1>",
-				mode: "text/html",
-				lineNumbers: true,
-				theme: "default",
-				readOnly: "nocursor"
-			});
-			app.getText(mdEditor, htmlEditor);
+			mdEditor.getWrapperElement().style["font-size"] = 16 + "px";
+			mdEditor.refresh();
+			app.getText(mdEditor);
 		},
-		getText: function getText(mdEditor, htmlEditor) {
+		getText: function getText(mdEditor) {
+
+			// Récupère la valeur du contenu de l'éditeur MD
+
 			$('.CodeMirror').on('keypress keyup keydown', function () {
 				var text = mdEditor.getValue();
-				app.mdToHTML(text, htmlEditor);
+				app.mdToHTML(text);
 			});
 		},
-		setText: function setText(value, htmlEditor) {
-			var text = htmlEditor.setValue(value);
+		setText: function setText(text) {
+
+			$('#result').html(text);
 		},
-		mdToHTML: function mdToHTML(text, htmlEditor) {
+		mdToHTML: function mdToHTML(text) {
+
+			// Transforme le MD en HTML
+
 			var text = marked(text);
-			app.setText(text, htmlEditor);
+			app.setText(text);
 		}
 	};
 	app.init();

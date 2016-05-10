@@ -11,8 +11,18 @@ body {
 #container {
 	width:1000px;
 	margin:0 auto;
+	display:flex;
+	justify-content: flex-start;
+	flex-direction: row-reverse;
+
 }
-.CodeMirror {
+#container .CodeMirror, #container #result{
 	width:50%;
 	display:inline-block;
+	min-height:80vh;
+}
+#container #result {
+	background-color: white;
+	border-left: solid 1px #e6e6e6;
+	padding:0 15px;
 }
