@@ -1,3 +1,5 @@
+var marked = require('marked');
+
 $(function(){
 	var app = {
 		init : function(){
@@ -5,22 +7,31 @@ $(function(){
 				value: "# Hello",
 				mode:  "text/x-markdown",
 				lineNumbers: true,
-				theme: "default"
+				theme: "default",
+				autofocus: true
 			})
 
 			var htmlEditor = CodeMirror(document.getElementById('container'), {
 				value: "<h1>Hello</h1>",
 				mode: "text/html",
 				lineNumbers: true,
-				theme: "default"
+				theme: "default",
+				readOnly: "nocursor"
 			})
-			app.getText(mdEditor);
+			app.getText(mdEditor, htmlEditor);
 		},
-		getText : function(editor){
-			$('.CodeMirror').on('keypress', function(){
-				var text = editor.getValue();
-				console.log(text);
+		getText : function(mdEditor, htmlEditor){
+			$('.CodeMirror').on('keypress keyup keydown', function(){
+				var text = mdEditor.getValue();
+				app.mdToHTML(text, htmlEditor);
 			});
+		},
+		setText : function(value, htmlEditor){
+			var text = htmlEditor.setValue(value);
+		},
+		mdToHTML : function(text, htmlEditor){
+			var text = marked(text);
+			app.setText(text, htmlEditor)
 		},
 	}
 	app.init();
