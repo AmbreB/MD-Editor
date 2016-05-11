@@ -9,12 +9,23 @@
 </head>
 <body>
 
-	<h1 class="titre">Markdown Editor</h1>
+	<h1 class="titre">Editeur de Markdown</h1>
 
 <!-- Corps de page -->
-
+	<div class="wrapper">
+		<label for="title">Titre du document</label>
+		<input type="text" name="title" id="title">
+	</div>
 	<div id="container">
+		<div class="list">
+			<h4>Mes documents</h4>
+			<div id="doclist"></div>
+		</div>
 		<div id="result"></div>
+	</div>
+	<div class="wrapper">
+		<button id="save" class="button">Sauvegarder</button>
+		<button id="create" class="button">Créer un nouveau document</button>
 	</div>
 
 <!-- Chargement des scripts -->

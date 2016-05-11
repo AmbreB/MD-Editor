@@ -1,4 +1,85 @@
 body {
-	background-color:teal;
-	color:white;
+	box-sizing:border-box;
+	font-family: 'Lato', sans-serif;
+	padding:0;
+	margin:0;
+	background-color: #F6F6F6;
+}
+.titre {
+	text-align: center;
+}
+
+/* Input du titre du document + Boutons */
+
+.wrapper {
+
+	width:500px;
+	margin:20px auto;
+	text-align: center;
+
+	& label {
+		display:block;
+		margin-bottom: 5px;
+	}
+
+	& input[type="text"] {
+		height:25px;
+		padding:5px 10px;
+		border:solid 1px #CCC;
+		border-radius: 4px;
+	}
+	& button {
+		height: 40px;
+		padding:0 20px ;
+		background-color: #4596a0;
+		color: white;
+		font-size: 0.9em;
+		margin: 10px;
+		border: none;
+		border-radius: 2px;
+		cursor: pointer;
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+		outline:none;
+		text-shadow: none;
+		transition: all .4s ease-out;
+
+		&:hover {
+			background-color: #2d757e;
+		}
+	}
+}
+
+/* Corps de page : Editeur */
+
+#container {
+	width:90vw;
+	margin:0 auto;
+	display:flex;
+	justify-content: flex-start;
+	flex-direction: row-reverse;
+
+	& .CodeMirror, & #result{
+		width:50%;
+		display:inline-block;
+		min-height:50vh;
+	}
+	
+	& #result {
+		background-color: white;
+		border-left: solid 1px #e6e6e6;
+		padding:0 15px;
+	}
+	& .list {
+		width:20%;
+		padding:10px;
+		& h4 {
+			text-align:center;
+			margin:0 0 20px 0;
+		}
+		& #doclist a {
+			display:block;
+			color:inherit;
+			margin-bottom: 10px;
+		}
+	}
 }
