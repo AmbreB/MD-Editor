@@ -1,4 +1,5 @@
 var marked = require('marked');
+var _ = require('underscore');
 
 $(function(){
 	var app = {
@@ -10,13 +11,13 @@ $(function(){
 		docs : [],
 		// Attribut servant à définir les valeurs par défaut d'un nouveau doc
 		def : {
-			text : "# Ceci est un texte par défaut",
-			title : "Ceci est un titre par défaut"
+			text : "# Bienvenue sur l'éditeur de Markdown !",
+			title : "Nouveau titre de document"
 		},
 		// Initialisation de l'éditeur
 		init : function(){
 			// Récupère les documents dans localStorage s'il y a
-			this.open()
+			this.open();
 			// Crée un éditeur CodeMirror
 			this.mdEditor = CodeMirror(document.getElementById('container'), {
 				value: "",
@@ -37,7 +38,7 @@ $(function(){
 		},
 		getCurrentDoc : function(){
 
-			if (this.docs.length == 0){
+			if (this.docs.length === 0){
 				this.createDoc();
 			} else if (this.docs.length <= this.docId) {
 				console.log("Y'a pas de document ici :", this.docId, "docs", this.docs);
@@ -50,27 +51,28 @@ $(function(){
 		},
 		bindListeners : function(){
 			// Récupère la valeur de l'éditeur, la transforme et l'affiche
-			$('.CodeMirror, #title').on('keypress keyup keydown', function(){
+			this.mdEditor.on('change', function(){
 				var text = app.mdEditor.getValue();
 				var title = $('#title').val();
 
 				var htmlText = app.mdToHTML(text);
 				app.setText(htmlText);
-
+				var save = _.debounce(function(){
+					app.saveCurrent(title, text)
+				}, 300)();
 			});
-			// Sauvegarde des valeurs dans l'objet
-			$('#save').on('click', function(){
-				var text = app.mdEditor.getValue();
+			$('#title').on('blur', function(){
 				var title = $('#title').val();
-
+				var text = app.mdEditor.getValue();
 				app.saveCurrent(title, text);
 			});
+
 			// Crée un nouveau document
 			$('#create').on('click', function(){
 				app.createDoc();
 			});
 			// Refresh les valeurs du title et du texte au clic sur un lien
-			$('a[data_id]').on('click', function(){
+			$('#doclist').on('click', 'a[data_id]', function(){
 				app.docId = parseInt($(this).attr('data_id'));
 				app.refreshEditor();
 			});
@@ -132,7 +134,8 @@ $(function(){
 			var htmlText = this.mdToHTML(text);
 			
 			this.setText(htmlText);
+
 		},
-	}
+	};
 	app.init();
 });

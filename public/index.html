@@ -3,44 +3,44 @@
 <head>
 	<meta charset="UTF-8">
 	<title>HTML all the MD !</title>
-	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,300,100' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="/lib/codemirror.css">
 	<link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-
-	<h1 class="titre">Editeur de Markdown</h1>
-
 <!-- Corps de page -->
-	<div class="wrapper">
-		<label for="title">Titre du document</label>
-		<input type="text" name="title" id="title">
-	</div>
-	<div id="container">
-		<div class="list">
-			<h4>Mes documents</h4>
-			<div id="doclist"></div>
+	<div class="content">
+		<div class="sidebar">
+			<div class="list">
+				<h4>Mes documents</h4>
+				<div id="doclist"></div>
+				<div class="centered">
+					<button id="create" class="button">Nouveau document</button>
+				</div>
+			</div>
 		</div>
-		<div id="result"></div>
+		<div class="wrapper">
+			<input type="text" name="title" id="title" class="inputitle">
+			<div id="container">
+				<div id="result"></div>
+			</div>
+		</div>
 	</div>
-	<div class="wrapper">
-		<button id="save" class="button">Sauvegarder</button>
-		<button id="create" class="button">Créer un nouveau document</button>
-	</div>
+
 
 <!-- Chargement des scripts -->
 
-	<script src="/js/jquery.js"></script>
-	<script src="/lib/codemirror.js"></script>
-	<script src="/lib/mode/xml/xml.js"></script>
-	<script src="/lib/mode/markdown/markdown.js"></script>
-	<script src="/lib/mode/gfm/gfm.js"></script>
-	<script src="/lib/mode/javascript/javascript.js"></script>
-	<script src="/lib/mode/css/css.js"></script>
-	<script src="/lib/mode/htmlmixed/htmlmixed.js"></script>
-	<script src="/lib/mode/clike/clike.js"></script>
-	<script src="/lib/mode/javascript/javascript.js"></script>
-	<script src="/lib/mode/markdown/markdown.js"></script>
-	<script src="/js/bundle.js"></script>
+	<script src="js/jquery.js"></script>
+	<script src="lib/codemirror.js"></script>
+	<script src="lib/mode/xml/xml.js"></script>
+	<script src="lib/mode/markdown/markdown.js"></script>
+	<script src="lib/mode/gfm/gfm.js"></script>
+	<script src="lib/mode/javascript/javascript.js"></script>
+	<script src="lib/mode/css/css.js"></script>
+	<script src="lib/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="lib/mode/clike/clike.js"></script>
+	<script src="lib/mode/javascript/javascript.js"></script>
+	<script src="lib/mode/markdown/markdown.js"></script>
+	<script src="js/bundle.js"></script>
 </body>
 </html>
